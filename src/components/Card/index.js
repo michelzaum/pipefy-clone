@@ -24,7 +24,19 @@ export default function Card({ data, index }) {
             }
             
             const targetSize = ref.current.getBoundingClientRect();// retornando o tamanho do elemento.
-            console.log(targetSize);
+            const targetCenter = (targetSize.bottom - targetSize.top) / 2; // ponto central do card.
+
+            const draggedOffset = monitor.getClientOffset();
+            const draggedTop = draggedOffset.y - targetSize.top;
+
+            if(draggedIndex < targetIndex && draggedTop < targetCenter) {
+                return;
+            }
+
+            if(draggedIndex > targetIndex && draggedTop > targetCenter) {
+                return;
+            }
+
         }
         
     })
